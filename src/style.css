@@ -1,0 +1,63 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes sure the body takes the full viewport height */
+    margin: 0; 
+    color: #221B15;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+}
+#centeredForm{
+    border: #40ac81 2px solid;
+    background-color: #215B45;
+    padding: 1vw;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    -webkit-box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+-moz-box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+width: 20%;
+
+}
+input {
+    padding: .7vw;
+    border-radius: 5px;
+    outline: none;
+    background-color: #215B45;
+    border: #40ac81 2px solid;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 50%;
+}
+button {
+    display: flex;
+    margin: 1vw;
+    padding: .5vw;
+    background-color: none;
+    display: block;
+    border: none;
+    border: #40ac81 2px solid;
+    background-color: #215B45;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+button:hover{
+    background-color: #40ac81;
+}
+button:focus{
+    background-color: black;
+}
+#resultDiv{
+    border: #40ac81 2px solid;
+    background-color: #215B45;
+    -webkit-box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+    -moz-box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+    box-shadow: 0px 0px 36px 3px rgba(33,91,69,1);
+    color: white;
+    padding: .5vw;
+    display: none;
+}

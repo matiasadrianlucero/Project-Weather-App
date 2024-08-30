@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="centeredForm">
+        <input id="weatherLocation" placeholder="Type the name of a city">
+        <button onclick="searchWeather()">SEARCH</button>
+        
+    </div>
+    <div id="resultDiv">
+        <p id="tempMin"></p>
+        <p id="tempMax"></p>
+        <p id="temperature"></p>
+        <p id="humidity"></p>
+        <p id="conditions"></p>
+    </div>
+    <script>
+        function searchWeather(){
+            let weatherLocation=document.getElementById("weatherLocation")
+            let myKey="P4BYMST5TQDPLWRG2CKBPHUTD"
+            fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ weatherLocation.value +"/today?key=" + myKey , {mode: 'cors'})
+                .then(function(response) {
+                return response.json();
+                })
+                .then(function(response) {
+                    console.log(response)
+                    
+                    let tempmin=document.getElementById("tempMin")
+                    let tempMax=document.getElementById("tempMax")
+                    let temperature=document.getElementById("temperature")
+                    let humidity=document.getElementById("humidity")
+                    let conditions=document.getElementById("conditions")
+                    
+                    tempmin.innerHTML="Min Temperature: "+ response.days[0].tempmin
+                    tempMax.innerHTML="Max Temperature: "+ response.days[0].tempmax
+                    conditions.innerHTML="Conditions: "+ response.days[0].conditions
+                    humidity.innerHTML="Humidity: "+ response.days[0].humidity
+                    temperature.innerHTML="Temperature: "+ response.days[0].temp
+
+                    document.getElementById("resultDiv").style.display="block"
+                });
+        }
+    </script>
+</body>
+</html>
