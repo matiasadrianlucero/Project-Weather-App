@@ -61,3 +61,6 @@ button:focus{
     padding: .5vw;
     display: none;
 }
+#resultDiv>button{
+    display: inline-block;
+}

@@ -7,11 +7,13 @@
 </head>
 <body>
     <div id="centeredForm">
-        <input id="weatherLocation" placeholder="Type the name of a city">
-        <button onclick="searchWeather()">SEARCH</button>
+        <input id="weatherLocation" placeholder="Type the name of a city" required>
+        <button onclick="searchWeather('F')">SEARCH</button>
         
     </div>
     <div id="resultDiv">
+        <button onclick="searchWeather('F')">Farenheit</button>
+        <button  onclick="searchWeather('C')">Celcius</button>
         <p id="tempMin"></p>
         <p id="tempMax"></p>
         <p id="temperature"></p>
@@ -19,10 +21,13 @@
         <p id="conditions"></p>
     </div>
     <script>
-        function searchWeather(){
+        let option="C"
+        function searchWeather(option){
             let weatherLocation=document.getElementById("weatherLocation")
             let myKey="P4BYMST5TQDPLWRG2CKBPHUTD"
-            fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ weatherLocation.value +"/today?key=" + myKey , {mode: 'cors'})
+            
+            if(weatherLocation.value!=""){
+                fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"+ weatherLocation.value +"/today?key=" + myKey , {mode: 'cors'})
                 .then(function(response) {
                 return response.json();
                 })
@@ -35,14 +40,27 @@
                     let humidity=document.getElementById("humidity")
                     let conditions=document.getElementById("conditions")
                     
-                    tempmin.innerHTML="Min Temperature: "+ response.days[0].tempmin
-                    tempMax.innerHTML="Max Temperature: "+ response.days[0].tempmax
-                    conditions.innerHTML="Conditions: "+ response.days[0].conditions
-                    humidity.innerHTML="Humidity: "+ response.days[0].humidity
-                    temperature.innerHTML="Temperature: "+ response.days[0].temp
+                    if(option=="F"){
+                        tempmin.innerHTML="Min Temperature: "+ response.days[0].tempmin + " °F"
+                        tempMax.innerHTML="Max Temperature: "+ response.days[0].tempmax +" °F"
+                        temperature.innerHTML="Temperature: "+ response.currentConditions.temp+" °F"
+                        conditions.innerHTML="Conditions: "+ response.days[0].conditions
+                        humidity.innerHTML="Humidity: "+ response.days[0].humidity
 
-                    document.getElementById("resultDiv").style.display="block"
+                        document.getElementById("resultDiv").style.display="block"
+                    } else {
+                        tempmin.innerHTML="Min Temperature: "+ ((response.days[0].tempmin-32)/1.8).toFixed(2) +" °C"
+                        tempMax.innerHTML="Max Temperature: "+(( response.days[0].tempmax-32)/1.8).toFixed(2)+" °C"
+                        temperature.innerHTML="Temperature: "+ ((response.currentConditions.temp-32)/1.8).toFixed(2)+" °C"
+                        conditions.innerHTML="Conditions: "+ response.days[0].conditions
+                        humidity.innerHTML="Humidity: "+ response.days[0].humidity
+
+                        document.getElementById("resultDiv").style.display="block"
+                    }
+
                 });
+            }
+
         }
     </script>
 </body>
